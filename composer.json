@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "ext-gd": "*",
+        "ext-zip": "*",
         "ezyang/htmlpurifier": "^4.19",
         "guzzlehttp/guzzle": "^7.2",
         "halaxa/json-machine": "^1.2",
