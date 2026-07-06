@@ -3,7 +3,12 @@
 @section('title', 'Tra cứu văn bản pháp lý')
 
 @section('content')
-    <header class="hero-panel text-white pt-5">
+    <style>
+        .main-panel {
+            background: linear-gradient(135deg, #0d6efd 0%, #2563eb 45%, #0f766e 100%);
+        }
+    </style>
+    <header class="main-panel text-white pt-5">
         <div class="container pt-2 pb-4">
             <div class="row align-items-center g-4">
                 <div class="col-lg-12">
@@ -25,19 +30,27 @@
                                     placeholder="Nhập từ khóa..." value="{{ request('q', '') }}">
                                 <div class="mt-3">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="search_scope" id="home-scope-all" value="all" {{ (request('search_scope', 'all') === 'all') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="search_scope"
+                                            id="home-scope-all" value="all"
+                                            {{ request('search_scope', 'all') === 'all' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="home-scope-all">Tất cả</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="search_scope" id="home-scope-title" value="title" {{ (request('search_scope') === 'title') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="search_scope"
+                                            id="home-scope-title" value="title"
+                                            {{ request('search_scope') === 'title' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="home-scope-title">Tiêu đề</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="search_scope" id="home-scope-document" value="so_ky_hieu" {{ (request('search_scope') === 'so_ky_hieu') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="search_scope"
+                                            id="home-scope-document" value="so_ky_hieu"
+                                            {{ request('search_scope') === 'so_ky_hieu' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="home-scope-document">Số hiệu văn bản</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="search_scope" id="home-scope-content" value="content_html" {{ (request('search_scope') === 'content_html') ? 'checked' : '' }}>
+                                        <input class="form-check-input" type="radio" name="search_scope"
+                                            id="home-scope-content" value="content_html"
+                                            {{ request('search_scope') === 'content_html' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="home-scope-content">Nội dung</label>
                                     </div>
                                 </div>
@@ -87,12 +100,10 @@
                 @foreach ($featuredBlocks as $index => $field)
                     <div class="col-md-6 col-lg-3">
                         <a href="{{ route('law.search', ['linh_vuc' => [$field['name'] ?? '']]) }}"
-                           class="text-decoration-none text-dark">
+                            class="text-decoration-none text-dark">
                             <div class="card h-100 border-0 shadow-sm overflow-hidden">
-                                <img src="{{ asset('images/field-' . ($index + 1) . '.jpg') }}"
-                                     class="card-img-top"
-                                     alt="{{ $field['name'] ?? 'Lĩnh vực' }}"
-                                     style="height: 180px; object-fit: cover;">
+                                <img src="{{ asset('images/field-' . ($index + 1) . '.jpg') }}" class="card-img-top"
+                                    alt="{{ $field['name'] ?? 'Lĩnh vực' }}" style="height: 180px; object-fit: cover;">
                                 <div class="card-body">
                                     <h3 class="h6 fw-bold mb-1">{{ $field['name'] ?? 'Chưa cập nhật' }}</h3>
                                     <p class="small text-soft mb-0">{{ $field['count'] ?? 0 }} văn bản</p>
@@ -126,10 +137,14 @@
                             @forelse ($recentLaws as $law)
                                 <tr onclick="window.location='{{ route('law.show', $law->id) }}'" style="cursor: pointer;">
                                     <td class="fw-semibold">{{ $law->so_ky_hieu ?? '—' }}</td>
-                                    <td>{{ $law->ngay_ban_hanh ? \Illuminate\Support\Carbon::parse($law->ngay_ban_hanh)->format('d/m/Y') : '—' }}</td>
+                                    <td>{{ $law->ngay_ban_hanh ? \Illuminate\Support\Carbon::parse($law->ngay_ban_hanh)->format('d/m/Y') : '—' }}
+                                    </td>
                                     <td>
-                                        <div class="fw-semibold line-clamp-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; max-height: 2.8em;">{{ $law->title }}</div>
-                                        <div class="small text-soft">{{ $law->loai_van_ban ?? 'Văn bản' }} • {{ $law->tinh_trang_hieu_luc ?? '—' }}</div>
+                                        <div class="fw-semibold line-clamp-2"
+                                            style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; max-height: 2.8em;">
+                                            {{ $law->title }}</div>
+                                        <div class="small text-soft">{{ $law->loai_van_ban ?? 'Văn bản' }} •
+                                            {{ $law->tinh_trang_hieu_luc ?? '—' }}</div>
                                     </td>
                                 </tr>
                             @empty
